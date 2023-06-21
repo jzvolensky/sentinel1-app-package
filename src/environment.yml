@@ -1,0 +1,5 @@
+name: env_app_hello
+channels:
+  - conda-forge
+dependencies:
+  - python
