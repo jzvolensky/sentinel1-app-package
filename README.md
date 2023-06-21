@@ -1,2 +1,3 @@
-# sentinel1-app-package
-Sample Sentinel 1 workflow compliant with the OGC Application Package
+# Sentinel 1 GRD statistics
+## WORK IN PROGRESS
+The aim of this project is to create an example application package for acquiring Sentinel 1 data and performing some basic statistics
