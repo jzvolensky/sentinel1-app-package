@@ -1,0 +1,6 @@
+STDDEV = 5.858535695940318
+Mean = 15.027133063046648
+Quant10 = 5.0
+Quant50 = 16.0
+Quant90 = 21.0
+Range of values = 82
