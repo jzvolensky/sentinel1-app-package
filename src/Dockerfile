@@ -1,11 +1,27 @@
-FROM python:alpine
+FROM ubuntu:20.04
 
-RUN mkdir testing_folder
-RUN cd testing_folder
+SHELL ["/bin/bash", "-c"]
+
+ENV BASH_ENV=~/.bashrc                                                                                                      \
+    MAMBA_ROOT_PREFIX=/srv/conda                                                                                            \
+    PATH=$PATH:/srv/conda/envs/env_sen1grd/bin
+
+
 WORKDIR /testing_folder
+
+
+ADD environment.yml /testing_folder/tmp/environment.yml
+COPY . /tmp
 
 ADD app.py .
 
-CMD ["python3", "-u", "app.py"]
+RUN apt-get update                                                                                                          && \
+    apt-get install -y ca-certificates ttf-dejavu file wget bash bzip2                                                      && \
+    wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba --strip-components=1 && \
+    ./micromamba shell init -s bash -p ~/micromamba                                                                         && \
+    apt-get clean autoremove --yes                                                                                          && \
+    rm -rf /var/lib/{apt,dpkg,cache,log}                                                                                    && \
+    cp ./micromamba /usr/bin                                                                                                && \
+    micromamba create -f /tmp/environment.yml                                                                                                                                                                                           
 
 

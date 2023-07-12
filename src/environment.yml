@@ -1,5 +1,8 @@
-name: env_app_hello
+name: env_sen1grd
 channels:
   - conda-forge
 dependencies:
   - python
+  - sentinelhub
+  - requests
+  - numpy

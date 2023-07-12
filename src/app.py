@@ -4,13 +4,13 @@ import requests
 import matplotlib.pyplot as plt
 import numpy as np
 
-# local file with the credentials
-import SenHubCreds
+# ADD env file with the credentials
+
 
 config = SHConfig()
-config.instance_id = SenHubCreds.instance_id
-config.sh_client_id = SenHubCreds.client_id
-config.sh_client_secret = SenHubCreds.client_secret
+config.instance_id = instance_id
+config.sh_client_id = client_id
+config.sh_client_secret = client_secret
 
 catalog = SentinelHubCatalog(config=config)
 collections = catalog.get_collections()
