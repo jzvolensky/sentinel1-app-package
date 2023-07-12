@@ -1,0 +1,109 @@
+{
+    "processes": [
+        {
+            "id": "UndeployProcess",
+            "title": "Undeploy Process",
+            "description": "This method will undeploy a deployed processing service.",
+            "mutable": false,
+            "version": "1.0.0",
+            "jobControlOptions": [
+                "sync-execute",
+                "async-execute",
+                "dismiss"
+            ],
+            "outputTransmission": [
+                "value",
+                "reference"
+            ],
+            "links": [
+                {
+                    "rel": "self",
+                    "type": "application\/json",
+                    "title": "Process Description",
+                    "href": "\/eric\/wps3\/processes\/UndeployProcess"
+                }
+            ]
+        },
+        {
+            "id": "GetStatus",
+            "title": "Produce an updated ExecuteResponse document. ",
+            "description": "Create an ExecuteResponse document from a sid (Service ID), it will use the niternal ZOO Kernel mechanisms to access the current status from a running Service and update the percentCompleted from the original backup file used by the ZOO Kernel when running a Service in background. ",
+            "mutable": false,
+            "version": "1.0.0",
+            "jobControlOptions": [
+                "sync-execute",
+                "async-execute",
+                "dismiss"
+            ],
+            "outputTransmission": [
+                "value",
+                "reference"
+            ],
+            "links": [
+                {
+                    "rel": "self",
+                    "type": "application\/json",
+                    "title": "Process Description",
+                    "href": "\/eric\/wps3\/processes\/GetStatus"
+                }
+            ]
+        },
+        {
+            "id": "DeployProcess",
+            "title": "Deploy Process",
+            "description": "This method will deploy an application package to create a process accessible through a WPS interface.",
+            "mutable": false,
+            "version": "1.0.0",
+            "jobControlOptions": [
+                "sync-execute",
+                "async-execute",
+                "dismiss"
+            ],
+            "outputTransmission": [
+                "value",
+                "reference"
+            ],
+            "links": [
+                {
+                    "rel": "self",
+                    "type": "application\/json",
+                    "title": "Process Description",
+                    "href": "\/eric\/wps3\/processes\/DeployProcess"
+                }
+            ]
+        }
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "type": "application\/json",
+            "href": "\/eric\/wps3\/processes"
+        }
+    ],
+    "numberTotal": 3
+}
+
+
+
+{
+    "id": "snuggs-0_3_0",
+    "title": "s expressions",
+    "description": "Applies s expressions to EO acquisitions",
+    "mutable": true,
+    "version": "0.3.0",
+    "outputTransmission": [
+        "value",
+        "reference"
+    ],
+    "jobControlOptions": [
+        "async-execute"
+    ],
+    "links": [
+        {
+            "rel": "http:\/\/www.opengis.net\/def\/rel\/ogc\/1.0\/execute",
+            "type": "application\/json",
+            "title": "Execute End Point",
+            "href": "\/eric\/wps3\/processes\/snuggs-0_3_0\/execution"
+        }
+    ]
+}
