@@ -3,9 +3,14 @@ from sentinelhub import CRS, BBox, DataCollection, SHConfig
 import requests
 import matplotlib.pyplot as plt
 import numpy as np
+from dotenv import load_dotenv
+import os
 
 # ADD env file with the credentials
-
+load_dotenv()
+instance_id = os.getenv('instance_id')
+client_id = os.getenv('client_id')
+client_secret = os.getenv('client_secret')
 
 config = SHConfig()
 config.instance_id = instance_id
