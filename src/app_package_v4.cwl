@@ -13,7 +13,6 @@ $graph:
         outputSource:
           - pyexec_step/calculated
         type: File
-        outputBinding: {}
     steps:
       - id: pyexec_step
         in:
@@ -41,10 +40,14 @@ $graph:
       - id: calculated
         format: .txt
         type: File
-        outputBinding: {}
     requirements:
       DockerRequirement:
         dockerPull: potato55/app-package
+      ResourceRequirement:
+        coresMin: '1'
+        coresMax: '2'
+        ramMin: '1024'
+        ramMax: '2048'
 $namespaces:
   s: https://schema.org/
 s:softwareVersion: 0.0.1
