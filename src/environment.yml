@@ -1,4 +1,4 @@
-name: env_sen1grd
+name: sen1grdenv
 channels:
   - conda-forge
 dependencies:
