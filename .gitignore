@@ -2,4 +2,4 @@ sentinel1-app-package/src/SenHubCreds.py
 __pycache__/
 .ipynb_checkpoints
 .env
-
+.DS_Store
