@@ -22,6 +22,7 @@ RUN apt-get update                                                              
     apt-get clean autoremove --yes                                                                                          && \
     rm -rf /var/lib/{apt,dpkg,cache,log}                                                                                    && \
     cp ./micromamba /usr/bin                                                                                                && \
-    micromamba create -f /tmp/environment.yml                                                                                                                                                                                           
+    micromamba create -f /tmp/environment.yml                                                                               && \
+    conda activate sen1grdenv                                                                                                                                                                                        
 
 
