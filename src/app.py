@@ -3,7 +3,7 @@ from sentinelhub import CRS, BBox, DataCollection, SHConfig
 import requests
 import numpy as np
 import sh_credentials
-# ADD env file with the credentials
+import click
 
 
 config = SHConfig()
@@ -15,8 +15,9 @@ catalog = SentinelHubCatalog(config=config)
 collections = catalog.get_collections()
 
 def aoi2box(aoi):
-
     return [float(c) for c in aoi.split(",")]
+
+time_interval = "2019-01-01", "2019-02-01"
 
 
 search_iterator = catalog.search(
@@ -67,7 +68,7 @@ requestdata = SentinelHubRequest(
         )
     ],
     responses=[SentinelHubRequest.output_response("default", MimeType.TIFF)],
-    bbox=BBOX,
+    bbox=aoi,
     size=[512, 343.697],
     config=config,
 )
@@ -104,5 +105,7 @@ def calculate_statistics(aoi):
     final_results.write("STDDEV = " + res_stddev + "\n" +"Mean = "+ res_mean + "\n"+"Quant10 = "+res_quant10 + "\n" +"Quant50 = "+res_quant50+ "\n" +"Quant90 = "+res_quant90+ "\n" +"Range of values = "+res_r_o_values)
 
     final_results.close()
+
+calculate_statistics(aoi)
 
 
