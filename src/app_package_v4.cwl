@@ -46,8 +46,8 @@ $graph:
       ResourceRequirement:
         coresMin: '1'
         coresMax: '2'
-        ramMin: '1024'
-        ramMax: '2048'
+        ramMin: '256'
+        ramMax: '1024'
 $namespaces:
   s: https://schema.org/
 s:softwareVersion: 0.0.1
