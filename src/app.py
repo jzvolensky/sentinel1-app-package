@@ -4,6 +4,8 @@ import requests
 import numpy as np
 import sh_credentials
 import click
+import yaml
+
 
 
 config = SHConfig()
@@ -18,18 +20,6 @@ def aoi2box(aoi):
     return [float(c) for c in aoi.split(",")]
 
 time_interval = "2019-01-01", "2019-02-01"
-
-
-search_iterator = catalog.search(
-    DataCollection.SENTINEL1,
-    bbox=aoi,
-    time=time_interval,
-    #filter="",
-    fields={"include": ["id", "properties.datetime"], "exclude": []},
-)
-
-results = list(search_iterator)
-print("Total number of results:", len(results))
 
 evalscript = '''
 //VERSION=3
@@ -58,34 +48,41 @@ function evaluatePixel(sample) {
 }
   
 '''
-requestdata = SentinelHubRequest(
-    data_folder='testing',
-    evalscript=evalscript,
-    input_data=[
-        SentinelHubRequest.input_data(
-        DataCollection.SENTINEL1,
-        time_interval=('2019-01-01','2019-02-01')
+def get_data(aoi):
+    
+    aoi = aoi2box(aoi)
+    bbox = BBox(bbox=aoi, crs=CRS.WGS84)
+    requestdata = SentinelHubRequest(
+        data_folder='testing',
+        evalscript=evalscript,
+        input_data=[
+            SentinelHubRequest.input_data(
+            DataCollection.SENTINEL1,
+            time_interval=('2019-01-01','2019-02-01')
+            )
+        ],
+        responses=[SentinelHubRequest.output_response("default", MimeType.TIFF)],
+        bbox=bbox,
+        size=[512, 343.697],
+        config=config,
         )
-    ],
-    responses=[SentinelHubRequest.output_response("default", MimeType.TIFF)],
-    bbox=aoi,
-    size=[512, 343.697],
-    config=config,
-)
+    sentinel_data = requestdata.get_data(save_data=True)
+    
+    return sentinel_data
 
-sentinel_data = requestdata.get_data(save_data=True)
-
-@click.command(
-    short_help='statcalc'
-    help='takes input parameters to calculate statistics on images'
-)
-@click.option(
-    '--aoi',
-    'aoi',
-    help='Bounding box of the Area of Interest'
-)
+#@click.command(
+#    short_help='statcalc',
+#    help='takes input parameters to calculate statistics on images'
+#)
+#@click.option(
+#    '--aoi',
+#    'aoi',
+#    help='Bounding box of the Area of Interest'
+#)
 
 def calculate_statistics(aoi):
+    sentinel_data = get_data(aoi)
+    
     stddev = np.nanstd(sentinel_data)
     mean = np.nanmean(sentinel_data)
     quant10 = np.quantile(sentinel_data, 0.1)
@@ -106,6 +103,11 @@ def calculate_statistics(aoi):
 
     final_results.close()
 
-calculate_statistics(aoi)
+if __name__ == "__main__":
+    with open("params.yml", "r") as f:
+        parameters = yaml.safe_load(f)
+        aoi_value = parameters.get("aoi")
+        calculate_statistics(aoi=aoi_value)
+
 
 
