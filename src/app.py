@@ -2,17 +2,9 @@ from sentinelhub import SHConfig, SentinelHubCatalog, SentinelHubDownloadClient,
 from sentinelhub import CRS, BBox, DataCollection, SHConfig
 import requests
 import numpy as np
-import click
-
-#Set up input parameters
-#BBOX = BBox((-87.72171, 17.11848, -87.342682, 17.481674), crs=CRS.WGS84)
-time_interval = "2019-01-01", "2019-02-01"
 
 # ADD env file with the credentials
 
-client_id = '6ce93625-2a00-4f57-b761-3012307d7cb3'
-client_secret = '96dd90d8-6547-4187-9'
-instance_id = '55b1d947-7b59-4bcd-a42e-fdbf8b9691e6'
 
 config = SHConfig()
 config.instance_id = instance_id

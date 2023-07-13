@@ -9,7 +9,6 @@ ENV BASH_ENV=~/.bashrc                                                          
 
 WORKDIR /testing_folder
 
-
 ADD environment.yml /testing_folder/tmp/environment.yml
 COPY . /tmp
 
