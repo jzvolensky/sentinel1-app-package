@@ -2,14 +2,14 @@ from sentinelhub import SHConfig, SentinelHubCatalog, SentinelHubDownloadClient,
 from sentinelhub import CRS, BBox, DataCollection, SHConfig
 import requests
 import numpy as np
-
+import sh_credentials
 # ADD env file with the credentials
 
 
 config = SHConfig()
-config.instance_id = instance_id
-config.sh_client_id = client_id
-config.sh_client_secret = client_secret
+config.instance_id = sh_credentials.instance_id
+config.sh_client_id = sh_credentials.client_id
+config.sh_client_secret = sh_credentials.client_secret
 
 catalog = SentinelHubCatalog(config=config)
 collections = catalog.get_collections()

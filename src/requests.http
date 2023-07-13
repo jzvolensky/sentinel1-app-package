@@ -44,7 +44,7 @@ Content-Type: application/json
 
 {
   "executionUnit": {
-    "href": "https://raw.githubusercontent.com/jzvolensky/sentinel1-app-package/main/src/application_packagage_PG_1.cwl",
+    "href": "https://raw.githubusercontent.com/jzvolensky/sentinel1-app-package/main/src/app_package_V2.cwl",
     "type": "application/cwl"
   }
 }
@@ -59,7 +59,7 @@ Accept: application/json
 ###
 
 # @name getProcessDetails
-GET https://{{ades}}/{{user}}/wps3/processes/pyexec-0_0_1 HTTP/1.1
+GET https://{{ades}}/{{user}}/wps3/processes/execute-0_0_1 HTTP/1.1
 Authorization: Bearer {{idToken}}
 Accept: application/json
 
@@ -78,11 +78,9 @@ Authorization: Bearer {{idToken}}
 Accept: application/json
 Content-Type: application/json
 Prefer: respond-async
-# Look into how inputs could be implemented into S1GRD stats app
 {
   "inputs": {
-      "input_reference":  "https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2A_38VNM_20221124_0_L2A",
-      "s_expression": "ndvi:(/ (- B05 B03) (+ B05 B03))"
+      "aoi": "-87.72171,17.11848,-87.342682,17.481674"
   },
   "response":"raw"
 }
