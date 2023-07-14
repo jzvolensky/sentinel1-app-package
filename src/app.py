@@ -90,7 +90,7 @@ def calculate_statistics(aoi):
     quant90 = np.quantile(sentinel_data, 0.9)
     r_o_values = np.ptp(sentinel_data)
 
-    final_results = open("results.txt", "w")
+    final_results = open("testing/results.txt", "w")
 
     res_stddev = repr(stddev)
     res_mean = repr(mean)
