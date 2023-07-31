@@ -1,1 +1,6 @@
 aoi: "41.818814,12.671755,41.822539,12.678664"
+time_start: "2019-01-01"
+time_end: "2019-02-01"
+instance_id: "YOUR_SENTINELHUB_INSTANCE_ID"   
+client_id: "YOUR_SENTINELHUB_CLIENT_ID"       
+client_secret: "YOUR_SENTINELHUB_CLIENT_SECRET"

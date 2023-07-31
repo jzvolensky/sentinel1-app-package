@@ -5,16 +5,9 @@ import numpy as np
 import sh_credentials
 import click
 import yaml
+import pystac
 
 
-
-config = SHConfig()
-config.instance_id = sh_credentials.instance_id
-config.sh_client_id = sh_credentials.client_id
-config.sh_client_secret = sh_credentials.client_secret
-
-catalog = SentinelHubCatalog(config=config)
-collections = catalog.get_collections()
 
 def aoi2box(aoi):
     return [float(c) for c in aoi.split(",")]
@@ -48,7 +41,15 @@ function evaluatePixel(sample) {
 }
   
 '''
-def get_data(aoi):
+def get_data(aoi, time_start, time_end, instance_id, client_id, client_secret):
+    
+    config = SHConfig()
+    config.instance_id = instance_id
+    config.sh_client_id = client_id
+    config.sh_client_secret = client_secret
+
+    catalog = SentinelHubCatalog(config=config)
+    collections = catalog.get_collections()
     
     aoi = aoi2box(aoi)
     bbox = BBox(bbox=aoi, crs=CRS.WGS84)
@@ -58,7 +59,7 @@ def get_data(aoi):
         input_data=[
             SentinelHubRequest.input_data(
             DataCollection.SENTINEL1,
-            time_interval=('2019-01-01','2019-02-01')
+            time_interval=(time_start, time_end)
             )
         ],
         responses=[SentinelHubRequest.output_response("default", MimeType.TIFF)],
@@ -70,6 +71,7 @@ def get_data(aoi):
     
     return sentinel_data
 
+
 #@click.command(
 #    short_help='statcalc',
 #    help='takes input parameters to calculate statistics on images'
@@ -80,8 +82,9 @@ def get_data(aoi):
 #    help='Bounding box of the Area of Interest'
 #)
 
-def calculate_statistics(aoi):
-    sentinel_data = get_data(aoi)
+def calculate_statistics(aoi, time_start, time_end, instance_id, client_id, client_secret):
+    
+    sentinel_data = get_data(aoi, time_start, time_end, instance_id, client_id, client_secret)
     
     stddev = np.nanstd(sentinel_data)
     mean = np.nanmean(sentinel_data)
@@ -90,24 +93,45 @@ def calculate_statistics(aoi):
     quant90 = np.quantile(sentinel_data, 0.9)
     r_o_values = np.ptp(sentinel_data)
 
-    final_results = open("testing/results.txt", "w")
+    catalog = pystac.Catalog(id='statistics_catalog', description='Statistical results of image processing.')
 
-    res_stddev = repr(stddev)
-    res_mean = repr(mean)
-    res_quant10 = repr(quant10)
-    res_quant50 = repr(quant50)
-    res_quant90 = repr(quant90)
-    res_r_o_values = repr(r_o_values)
+    # Create an Item for the statistical results
+    item = pystac.Item(id='statistics_item',
+                       geometry=None,
+                       bbox=None,
+                       datetime=None,
+                       properties={
+                           'STDDEV': stddev,
+                           'Mean': mean,
+                           'Quantile_10': quant10,
+                           'Quantile_50': quant50,
+                           'Quantile_90': quant90,
+                           'Range_of_Values': r_o_values
+                       })
 
-    final_results.write("STDDEV = " + res_stddev + "\n" +"Mean = "+ res_mean + "\n"+"Quant10 = "+res_quant10 + "\n" +"Quant50 = "+res_quant50+ "\n" +"Quant90 = "+res_quant90+ "\n" +"Range of values = "+res_r_o_values)
+    # Add the item to the catalog
+    catalog.add_item(item)
 
-    final_results.close()
+    # Save the STAC catalog to a JSON file
+    catalog.save('output_catalog.json')
 
 if __name__ == "__main__":
     with open("params.yml", "r") as f:
         parameters = yaml.safe_load(f)
         aoi_value = parameters.get("aoi")
-        calculate_statistics(aoi=aoi_value)
-
+        time_start = parameters.get("time_start") 
+        time_end = parameters.get("time_end")
+        instance_id_value = parameters.get("instance_id")
+        client_id_value = parameters.get("client_id")
+        client_secret_value = parameters.get("client_secret")
+        
+        calculate_statistics(
+            aoi=aoi_value,
+            time_start=time_start,
+            time_end=time_end,
+            instance_id=instance_id_value,
+            client_id=client_id_value,
+            client_secret=client_secret_value,
+        )
 
 

@@ -4,7 +4,7 @@ SHELL ["/bin/bash", "-c"]
 
 ENV BASH_ENV=~/.bashrc                                                                                                      \
     MAMBA_ROOT_PREFIX=/srv/conda                                                                                            \
-    PATH=$PATH:/srv/conda/envs/env_sen1grd/bin
+    PATH=$PATH:/srv/conda/envs/sen1grdenv/bin
 
 
 WORKDIR /testing_folder
@@ -13,6 +13,8 @@ ADD environment.yml /testing_folder/tmp/environment.yml
 COPY . /tmp
 
 ADD app.py .
+
+COPY params.yml /testing_folder/params.yml
 
 RUN apt-get update                                                                                                          && \
     apt-get install -y ca-certificates ttf-dejavu file wget bash bzip2                                                      && \
