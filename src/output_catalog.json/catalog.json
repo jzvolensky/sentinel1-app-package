@@ -1,0 +1,24 @@
+{
+  "type": "Catalog",
+  "id": "res_catalog",
+  "stac_version": "1.0.0",
+  "description": "add later",
+  "links": [
+    {
+      "rel": "root",
+      "href": "/home/jzvolensky/Documents/sentinel1-app-package/src/output_catalog.json/catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "child",
+      "href": "/home/jzvolensky/Documents/sentinel1-app-package/src/output_catalog.json/result_collection/collection.json",
+      "type": "application/json",
+      "title": "Collection of Results"
+    },
+    {
+      "rel": "self",
+      "href": "/home/jzvolensky/Documents/sentinel1-app-package/src/output_catalog.json/catalog.json",
+      "type": "application/json"
+    }
+  ]
+}
