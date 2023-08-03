@@ -43,5 +43,5 @@ $graph:
         dockerPull: potato55/app-package:v1
 $namespaces:
   s: https://schema.org/
-s:softwareVersion: 0.1.0
+s:softwareVersion: 0.0.1
 s:dateCreated: '2023-07-13'
