@@ -40,7 +40,7 @@ $graph:
         outputBinding: {}
     requirements:
       DockerRequirement:
-        dockerPull: potato55/app-package
+        dockerPull: potato55/app-package:v1
 $namespaces:
   s: https://schema.org/
 s:softwareVersion: 0.1.0
