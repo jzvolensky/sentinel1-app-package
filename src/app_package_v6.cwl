@@ -41,6 +41,12 @@ $graph:
     requirements:
       DockerRequirement:
         dockerPull: potato55/app-package:v1
+        # Add resource limits here
+        resourceRequirement:
+          coresMin: 1
+          coresMax: 2
+          ramMin: 1G
+          ramMax: 2G
 $namespaces:
   s: https://schema.org/
 s:softwareVersion: 0.0.1
