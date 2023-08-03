@@ -152,15 +152,15 @@ def to_Catalog(stddev,mean,quant10,quant50,quant90,r_o_values):
 
     catalog_json = res_catalog.to_dict()
     catalog_json_str = json.dumps(catalog_json)
-    minio_client = Minio('minio-console.192.1 8.49.2.nip.io',
-                         secure=False)
-    
+    minio_client = Minio('minio-console.192.18.49.2.nip.io',
+                     secure=False)
+
     bucket_name = 'EOEPCA'
     object_name = 'S1output_catalog.json'
 
     minio_client.put_object(bucket_name, object_name, catalog_json_str.encode('utf-8'), len(catalog_json_str))
 
-    
+
 if __name__ == "__main__":
     with open("params.yml", "r") as f:
         parameters = yaml.safe_load(f)
