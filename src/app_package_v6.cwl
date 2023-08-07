@@ -40,13 +40,13 @@ $graph:
         outputBinding: {}
     requirements:
       DockerRequirement:
-        dockerPull: potato55/app-package:v1
+        dockerPull: potato55/app-package:amd64
         # Add resource limits here
         resourceRequirement:
           coresMin: 1
           coresMax: 2
-          ramMin: 1G
-          ramMax: 2G
+          ramMin: 2G
+          ramMax: 4G
 $namespaces:
   s: https://schema.org/
 s:softwareVersion: 0.0.1
