@@ -40,7 +40,7 @@ $graph:
         outputBinding: {}
     requirements:
       DockerRequirement:
-        dockerPull: potato55/app-package:v1
+        dockerPull: potato55/app-package:amd64
         # Add resource limits here
         resourceRequirement:
           coresMin: 1
