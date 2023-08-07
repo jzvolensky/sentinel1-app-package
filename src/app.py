@@ -10,6 +10,7 @@ import pandas as pd
 import json
 from datetime import datetime
 from minio import Minio
+import io
 
 
 def aoi2box(aoi):
@@ -31,18 +32,6 @@ function setup() {
       {
         id: "default",
         bands: 1,
-function setup() {
-  return {
-    input: [
-      {
-        bands: ["VV","VH"],                  
-      }
-    ],
-    output: [
-      {
-        id: "default",
-        bands: 1,
-        sampleType: "AUTO",        
         sampleType: "AUTO",        
       },    
     ],
@@ -50,11 +39,10 @@ function setup() {
   };
 }
 
-
 function evaluatePixel(sample) {
-        return [sample.VV];
+  return [sample.VV];
 }
-  
+
 '''
 def get_data(aoi, time_start, time_end, instance_id, client_id, client_secret):
     
@@ -157,9 +145,10 @@ def to_Catalog(stddev,mean,quant10,quant50,quant90,r_o_values):
 
     bucket_name = 'EOEPCA'
     object_name = 'S1output_catalog.json'
+    catalog_bytes = catalog_json_str.encode('utf-8')
 
-    minio_client.put_object(bucket_name, object_name, catalog_json_str.encode('utf-8'), len(catalog_json_str))
-
+    #minio_client.put_object(bucket_name, object_name, catalog_json_str.encode('utf-8'), len(catalog_json_str))
+    minio_client.put_object(bucket_name, object_name, io.BytesIO(catalog_bytes), len(catalog_bytes))
 
 if __name__ == "__main__":
     with open("params.yml", "r") as f:
