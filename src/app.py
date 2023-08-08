@@ -1,3 +1,4 @@
+from xmlrpc.client import ResponseError
 from sentinelhub import SHConfig, SentinelHubCatalog, SentinelHubDownloadClient, SentinelHubRequest, BBox, CRS, DataCollection, MimeType
 from sentinelhub import CRS, BBox, DataCollection, SHConfig
 import requests
@@ -102,6 +103,8 @@ def calculate_statistics(aoi, time_start, time_end, instance_id, client_id, clie
 
     return stddev, mean, quant10, quant50, quant90, r_o_values
 
+print("Calculating statistics")
+
 def to_Catalog(stddev,mean,quant10,quant50,quant90,r_o_values):
     res_catalog = pystac.Catalog(id='res_catalog', description='add later')
 
@@ -133,22 +136,30 @@ def to_Catalog(stddev,mean,quant10,quant50,quant90,r_o_values):
     item.properties['quant90'] = float(quant90)
     item.properties['r_o_values'] = float(r_o_values)
 
+    print("Adding item to collection")
+
     
     collection.add_item(item)
     res_catalog.add_child(collection)
     res_catalog.normalize_and_save('output_catalog.json')
 
+    print("Catalog saved to output_catalog.json")
+
     catalog_json = res_catalog.to_dict()
     catalog_json_str = json.dumps(catalog_json)
     minio_client = Minio('minio-console.192.18.49.2.nip.io',
                      secure=False)
+    
+    print("Uploading catalog to Minio")
 
-    bucket_name = 'EOEPCA'
+    bucket_name = 'eoepca'
     object_name = 'S1output_catalog.json'
     catalog_bytes = catalog_json_str.encode('utf-8')
-
-    #minio_client.put_object(bucket_name, object_name, catalog_json_str.encode('utf-8'), len(catalog_json_str))
-    minio_client.put_object(bucket_name, object_name, io.BytesIO(catalog_bytes), len(catalog_bytes))
+    try:
+        minio_client.put_object(bucket_name, object_name, io.BytesIO(catalog_bytes), len(catalog_bytes))
+    except ResponseError as err:
+        print(err)
+    print("Catalog uploaded to Minio")
 
 if __name__ == "__main__":
     with open("params.yml", "r") as f:
