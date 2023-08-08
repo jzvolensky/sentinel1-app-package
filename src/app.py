@@ -1,9 +1,6 @@
-from xmlrpc.client import ResponseError
-from sentinelhub import SHConfig, SentinelHubCatalog, SentinelHubDownloadClient, SentinelHubRequest, BBox, CRS, DataCollection, MimeType
+from sentinelhub import SHConfig, SentinelHubCatalog, SentinelHubRequest, BBox, CRS, DataCollection, MimeType
 from sentinelhub import CRS, BBox, DataCollection, SHConfig
-import requests
 import numpy as np
-import click
 import yaml
 import pystac
 from pystac import TemporalExtent
@@ -46,8 +43,11 @@ function evaluatePixel(sample) {
 }
 
 '''
+
 def get_data(aoi, time_start, time_end, instance_id, client_id, client_secret):
-    
+    '''
+    Configure the Sentinel Hub Catalog and request data based on the input parameters
+    '''
     config = SHConfig()
     config.instance_id = instance_id
     config.sh_client_id = client_id
@@ -79,18 +79,10 @@ def get_data(aoi, time_start, time_end, instance_id, client_id, client_secret):
     return sentinel_data
 
 
-#@click.command(
-#    short_help='statcalc',
-#    help='takes input parameters to calculate statistics on images'
-#)
-#@click.option(
-#    '--aoi',
-#    'aoi',
-#    help='Bounding box of the Area of Interest'
-#)
-
 def calculate_statistics(aoi, time_start, time_end, instance_id, client_id, client_secret):
-    
+    '''
+    Calculate the statistics of the Sentinel-1 data
+    '''
     sentinel_data = get_data(aoi, time_start, time_end, instance_id, client_id, client_secret)
     
     sentinel_data = sentinel_data.astype(np.float32)
@@ -107,10 +99,16 @@ def calculate_statistics(aoi, time_start, time_end, instance_id, client_id, clie
 print("Calculating statistics")
 
 def to_Catalog(stddev,mean,quant10,quant50,quant90,r_o_values):
+    '''
+    Create a STAC catalog and add the calculated statistics as properties to the catalog
+    At the end there is an attempt at saving the data to a Minio bucket, but it is not working
+    The Minio bucket is not accessible from outside the cluster
+    Or even when running the code from inside the cluster, the Minio bucket is not accessible
+    '''
     res_catalog = pystac.Catalog(id='res_catalog', description='add later')
 
     temporal_extent = TemporalExtent(
-        intervals=[(datetime.utcnow(), None)]  # Use a list of intervals with start and end dates
+        intervals=[(datetime.utcnow(), None)]  
     )
 
     collection = pystac.Collection(
@@ -157,7 +155,6 @@ def to_Catalog(stddev,mean,quant10,quant50,quant90,r_o_values):
     object_name = 'S1output_catalog.json'
     catalog_bytes = catalog_json_str.encode('utf-8')
     try:
-    # MinIO-related code here
         minio_client.put_object(bucket_name, object_name, io.BytesIO(catalog_bytes), len(catalog_bytes))
         print("Catalog uploaded to Minio")
     except InvalidResponseError as err:
@@ -168,6 +165,9 @@ def to_Catalog(stddev,mean,quant10,quant50,quant90,r_o_values):
         print(e)
 
 if __name__ == "__main__":
+    '''
+    read the parameters from the params.yml file and call the calculate_statistics function
+    '''
     with open("params.yml", "r") as f:
         parameters = yaml.safe_load(f)
         aoi_value = parameters.get("aoi")
