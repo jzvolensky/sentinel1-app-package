@@ -22,10 +22,10 @@ RUN micromamba create -f environment.yml
 
 # Activate the conda environment
 SHELL ["/bin/bash", "-c"]
-RUN echo "source activate sen1grdenv" >> ~/.bashrc
+RUN echo "source activate sen1env" >> ~/.bashrc
 
 # Copy your application code to the container
 COPY . /app
 
 # Run your application
-CMD ["micromamba", "run", "-n", "sen1grdenv", "python", "app.py"]
+CMD ["micromamba", "run", "-n", "sen1env", "python", "app.py"]

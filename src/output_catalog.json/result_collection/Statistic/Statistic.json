@@ -9,30 +9,30 @@
     "quant50": 17.0,
     "quant90": 51.0,
     "r_o_values": 128.0,
-    "datetime": "2023-08-08T12:38:46.758563Z"
+    "datetime": "2023-08-08T13:22:45.760792Z"
   },
   "geometry": null,
   "links": [
     {
       "rel": "root",
-      "href": "/Users/jzvolensky/sentinel1-app-package/src/output_catalog.json/catalog.json",
+      "href": "/home/jzvolensky/Documents/sentinel1-app-package/src/output_catalog.json/catalog.json",
       "type": "application/json"
     },
     {
       "rel": "collection",
-      "href": "/Users/jzvolensky/sentinel1-app-package/src/output_catalog.json/result_collection/collection.json",
+      "href": "/home/jzvolensky/Documents/sentinel1-app-package/src/output_catalog.json/result_collection/collection.json",
       "type": "application/json",
       "title": "Collection of Results"
     },
     {
       "rel": "parent",
-      "href": "/Users/jzvolensky/sentinel1-app-package/src/output_catalog.json/result_collection/collection.json",
+      "href": "/home/jzvolensky/Documents/sentinel1-app-package/src/output_catalog.json/result_collection/collection.json",
       "type": "application/json",
       "title": "Collection of Results"
     },
     {
       "rel": "self",
-      "href": "/Users/jzvolensky/sentinel1-app-package/src/output_catalog.json/result_collection/Statistic/Statistic.json",
+      "href": "/home/jzvolensky/Documents/sentinel1-app-package/src/output_catalog.json/result_collection/Statistic/Statistic.json",
       "type": "application/json"
     }
   ],

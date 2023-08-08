@@ -6,22 +6,22 @@
   "links": [
     {
       "rel": "root",
-      "href": "/Users/jzvolensky/sentinel1-app-package/src/output_catalog.json/catalog.json",
+      "href": "/home/jzvolensky/Documents/sentinel1-app-package/src/output_catalog.json/catalog.json",
       "type": "application/json"
     },
     {
       "rel": "item",
-      "href": "/Users/jzvolensky/sentinel1-app-package/src/output_catalog.json/result_collection/Statistic/Statistic.json",
+      "href": "/home/jzvolensky/Documents/sentinel1-app-package/src/output_catalog.json/result_collection/Statistic/Statistic.json",
       "type": "application/json"
     },
     {
       "rel": "parent",
-      "href": "/Users/jzvolensky/sentinel1-app-package/src/output_catalog.json/catalog.json",
+      "href": "/home/jzvolensky/Documents/sentinel1-app-package/src/output_catalog.json/catalog.json",
       "type": "application/json"
     },
     {
       "rel": "self",
-      "href": "/Users/jzvolensky/sentinel1-app-package/src/output_catalog.json/result_collection/collection.json",
+      "href": "/home/jzvolensky/Documents/sentinel1-app-package/src/output_catalog.json/result_collection/collection.json",
       "type": "application/json"
     }
   ],
@@ -38,7 +38,7 @@
     "temporal": {
       "interval": [
         [
-          "2023-08-08T12:38:46.758446Z",
+          "2023-08-08T13:22:45.760682Z",
           null
         ]
       ]

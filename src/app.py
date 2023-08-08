@@ -11,6 +11,7 @@ import pandas as pd
 import json
 from datetime import datetime
 from minio import Minio
+from minio.error import InvalidResponseError 
 import io
 
 
@@ -156,10 +157,15 @@ def to_Catalog(stddev,mean,quant10,quant50,quant90,r_o_values):
     object_name = 'S1output_catalog.json'
     catalog_bytes = catalog_json_str.encode('utf-8')
     try:
+    # MinIO-related code here
         minio_client.put_object(bucket_name, object_name, io.BytesIO(catalog_bytes), len(catalog_bytes))
-    except ResponseError as err:
+        print("Catalog uploaded to Minio")
+    except InvalidResponseError as err:
+        print("Error uploading catalog to Minio:")
         print(err)
-    print("Catalog uploaded to Minio")
+    except Exception as e:
+        print("An unexpected error occurred:")
+        print(e)
 
 if __name__ == "__main__":
     with open("params.yml", "r") as f:
