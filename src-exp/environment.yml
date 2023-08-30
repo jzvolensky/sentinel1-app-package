@@ -1,0 +1,11 @@
+name: ap-hello-world
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - numpy
+  - click
+  - pyyaml
+  - pystac
