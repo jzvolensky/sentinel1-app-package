@@ -10,7 +10,10 @@ $graph:
         type: string
     outputs:
       - id: wf_out
+        outputSource:
+          - pyexec_step/results
         type: Directory
+        outputBinding: {}
     steps:
       - id: pyexec_step
         in:
