@@ -1,22 +1,14 @@
-FROM ubuntu:latest
-
-WORKDIR /app
+FROM ubuntu
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     ca-certificates file wget bash bzip2 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba --strip-components=1 && \
-    mv micromamba /usr/bin/
+WORKDIR /app
 
-COPY environment.yml /app/environment.yml
+COPY /params.yaml /app
 
-RUN micromamba create -f environment.yml
+COPY ./hello_world.py /app
 
-SHELL ["/bin/bash", "-c"]
-RUN echo "source activate sen1env" >> ~/.bashrc
-
-COPY . /app
-
-CMD ["micromamba", "run", "-n", "ap-hello-world", "python", "hello_world.py","-f","params.yaml"]
+ENV PATH="/app:${PATH}"

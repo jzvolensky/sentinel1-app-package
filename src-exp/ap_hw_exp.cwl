@@ -38,7 +38,7 @@ $graph:
         outputBinding: {}
     requirements:
       DockerRequirement:
-        dockerPull: potato55/hello_world_app:1.0
+        dockerPull: potato55/hello_world_app:1.5
 $namespaces:
   s: https://schema.org/
 s:softwareVersion: '1.0'
