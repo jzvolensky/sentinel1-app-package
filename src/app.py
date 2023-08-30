@@ -47,7 +47,11 @@ function evaluatePixel(sample) {
 
 '''
 def get_data(aoi, time_start, time_end, instance_id, client_id, client_secret):
+    '''
+    NEED TO PROVIDE OWN SENTINELHUB CREDENTIALS. A reasonable way to securely store them
+    has not been implemented yet. 
     
+    '''
     config = SHConfig()
     config.instance_id = instance_id
     config.sh_client_id = client_id
