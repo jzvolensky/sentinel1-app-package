@@ -1,14 +1,14 @@
 import click
 import pystac
-import requests
 import json
 import yaml
 from datetime import datetime
 
 @click.command()
 @click.option("-f", "--file", type=click.Path(exists=True), default="params.yaml", help="Path to parameter file")
+@click.option("-o", "--output", type=click.Path(), default="catalog.json", help="Path to output STAC catalog JSON file")
 
-def main(file):
+def main(file, output):
     with open(file, "r") as params_file:
         params = yaml.safe_load(params_file)
 
@@ -21,19 +21,20 @@ def main(file):
                     datetime=datetime(1970,1,1,0,0,0), 
                     bbox=None, 
                     properties={
-                        "title": input_string  # Set the title to the input_string value
+                        "title": input_string  
                     }
                 )
     item.add_asset("data", pystac.Asset(href="http://example.com/data"))
 
     catalog.add_item(item)
 
-    # Print the entire catalog structure
     catalog_dict = catalog.to_dict()
     click.echo(json.dumps(catalog_dict, indent=4))
     
-    # Access the title of the item
     click.echo(f"Item Title: {item.common_metadata.title}")
+
+    with open(output, "w") as catalog_file:
+        json.dump(catalog_dict, catalog_file, indent=4)
 
 if __name__ == "__main__":
     main()
