@@ -1,0 +1,23 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "experimental" ]
+  pull_request:
+    branches: [ "experimental" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t test_image -f src-exp/Dockerfile .
+
+      - name: Test Docker image
+        run: |
+          docker run --rm my-docker-image python src-exp/hello_world.py -f params.yaml -o test-catalog.json
+
