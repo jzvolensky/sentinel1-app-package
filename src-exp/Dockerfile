@@ -1,29 +1,12 @@
-FROM python:3.8-alpine
-
-RUN apk update && \
-    apk add --no-cache \
-    ca-certificates \
-    bash \
-    wget
-
-
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && \
-    /bin/bash miniconda.sh -b -p /opt/conda && \
-    rm miniconda.sh
-
-
-ENV PATH="/opt/conda/bin:${PATH}"
-
-COPY environment.yml /app/environment.yml
-RUN conda env create -f /app/environment.yml && \
-    conda clean -afy
-ENV PATH="/opt/conda/envs/myenv/bin:${PATH}"
+FROM continuumio/miniconda3:latest
 
 WORKDIR /app
-
 COPY params.yaml /app
 COPY hello_world.py /app
+COPY environment.yml /app
 
-ENV PATH="/app:${PATH}"
+RUN conda env create -f /app/environment.yml
 
-CMD ["hello_world.py"]
+ENV PATH="/opt/conda/envs/myenv/bin:${PATH}"
+
+CMD ["/bin/bash","-c", "conda run -n ap-hello-world python hello_world.py"]
