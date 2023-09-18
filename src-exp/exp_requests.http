@@ -106,3 +106,7 @@ Accept: application/json
 GET https://{{ades}}/{{user}}/wps3/jobs HTTP/1.1
 Authorization: Bearer {{idToken}}
 Accept: application/json
+
+# Errors I get
+# wf-execution-1-0c2fee218-5620-11ee-9b55-0242ac11000d   wf-c2fee218-5620-11ee-9b55-0242ac11000d--1-6slx8   2/3     Error              0                  15s
+# wf-execution-1-0c2fee218-5620-11ee-9b55-0242ac11000d   wf-c2fee218-5620-11ee-9b55-0242ac11000d--1-zr2xt   0/3     Error    
