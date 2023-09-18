@@ -1,4 +1,14 @@
 cwlVersion: v1.0
+$namespaces:
+  s: https://schema.org/
+s:softwareVersion: '1.0'
+s:dateCreated: '2023-09-18'
+s:codeRepository: https://github.com/jzvolensky/sentinel1-app-package/tree/experimental
+s:author:
+  - s:name: Juraj Zvolensky
+    s:email: 
+    s:affiliation: This gave me depression  
+    
 $graph:
   - id: workflowHW
     class: Workflow
@@ -47,12 +57,3 @@ $graph:
     requirements:
       DockerRequirement:
         dockerPull: potato55/hello_world_app:2.5
-$namespaces:
-  s: https://schema.org/
-s:softwareVersion: '1.0'
-s:dateCreated: '2023-09-18'
-s:codeRepository: https://github.com/jzvolensky/sentinel1-app-package/tree/experimental
-s:author:
-  - s:name: Juraj
-    s:email: Zvolensky
-    s:affiliation: AP gave me depression
