@@ -1,0 +1,215 @@
+(ap-hello-world) jzvolensky@sci-jzvolensky:~/Documents/sentinel1-app-package/src-exp$ cwl-runner --debug ap_hw_exp.cwl#runHWapp params.yaml 
+INFO /usr/bin/cwl-runner 3.1.20220224085855
+INFO Resolved 'ap_hw_exp.cwl#runHWapp' to 'file:///home/jzvolensky/Documents/sentinel1-app-package/src-exp/ap_hw_exp.cwl#runHWapp'
+ERROR Workflow error:
+Invalid job input record:
+params.yaml:1:1: the `Input_String` field is not valid because
+                   is not a dict
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/cwltool/process.py", line 799, in _init_job
+    validate_ex(
+  File "/usr/lib/python3/dist-packages/schema_salad/validate.py", line 460, in validate_ex
+    raise ValidationException("", None, errors, "*")
+schema_salad.exceptions.ValidationException: params.yaml:1:1: the `Input_String` field is not valid because
+                   is not a dict
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/cwltool/main.py", line 1343, in main
+    (out, status) = real_executor(
+  File "/usr/lib/python3/dist-packages/cwltool/executors.py", line 60, in __call__
+    return self.execute(process, job_order_object, runtime_context, logger)
+  File "/usr/lib/python3/dist-packages/cwltool/executors.py", line 143, in execute
+    self.run_jobs(process, job_order_object, logger, runtime_context)
+  File "/usr/lib/python3/dist-packages/cwltool/executors.py", line 228, in run_jobs
+    for job in jobiter:
+  File "/usr/lib/python3/dist-packages/cwltool/command_line_tool.py", line 990, in job
+    builder = self._init_job(job_order, runtimeContext)
+  File "/usr/lib/python3/dist-packages/cwltool/process.py", line 850, in _init_job
+    raise WorkflowException("Invalid job input record:\n" + str(err)) from err
+cwltool.errors.WorkflowException: Invalid job input record:
+params.yaml:1:1: the `Input_String` field is not valid because
+                   is not a dict
+(ap-hello-world) jzvolensky@sci-jzvolensky:~/Documents/sentinel1-app-package/src-exp$ cwl-runner --debug ap_hw_exp.cwl#runHWapp 
+INFO /usr/bin/cwl-runner 3.1.20220224085855
+INFO Resolved 'ap_hw_exp.cwl#runHWapp' to 'file:///home/jzvolensky/Documents/sentinel1-app-package/src-exp/ap_hw_exp.cwl#runHWapp'
+usage: ap_hw_exp.cwl#runHWapp [-h] --Input_String INPUT_STRING [job_order]
+ap_hw_exp.cwl#runHWapp: error: the following arguments are required: --Input_String
+(ap-hello-world) jzvolensky@sci-jzvolensky:~/Documents/sentinel1-app-package/src-exp$ cwl-runner --debug ap_hw_exp.cwl#runHWapp --Input_String "HI"
+INFO /usr/bin/cwl-runner 3.1.20220224085855
+INFO Resolved 'ap_hw_exp.cwl#runHWapp' to 'file:///home/jzvolensky/Documents/sentinel1-app-package/src-exp/ap_hw_exp.cwl#runHWapp'
+DEBUG Parsed job order from command line: {
+    "id": "ap_hw_exp.cwl#runHWapp",
+    "Input_String": {
+        "class": "File",
+        "location": "file:///home/jzvolensky/Documents/sentinel1-app-package/src-exp/HI"
+    }
+}
+DEBUG [job runHWapp] initializing from file:///home/jzvolensky/Documents/sentinel1-app-package/src-exp/ap_hw_exp.cwl#runHWapp
+DEBUG [job runHWapp] {
+    "Input_String": {
+        "class": "File",
+        "location": "file:///home/jzvolensky/Documents/sentinel1-app-package/src-exp/HI",
+        "basename": "HI",
+        "nameroot": "HI",
+        "nameext": ""
+    }
+}
+ERROR Input object failed validation:
+[Errno 2] No such file or directory: '/home/jzvolensky/Documents/sentinel1-app-package/src-exp/HI'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/cwltool/pathmapper.py", line 144, in visit
+    st = os.lstat(deref)
+FileNotFoundError: [Errno 2] No such file or directory: '/home/jzvolensky/Documents/sentinel1-app-package/src-exp/HI'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/cwltool/main.py", line 1343, in main
+    (out, status) = real_executor(
+  File "/usr/lib/python3/dist-packages/cwltool/executors.py", line 60, in __call__
+    return self.execute(process, job_order_object, runtime_context, logger)
+  File "/usr/lib/python3/dist-packages/cwltool/executors.py", line 143, in execute
+    self.run_jobs(process, job_order_object, logger, runtime_context)
+  File "/usr/lib/python3/dist-packages/cwltool/executors.py", line 228, in run_jobs
+    for job in jobiter:
+  File "/usr/lib/python3/dist-packages/cwltool/command_line_tool.py", line 1021, in job
+    builder.pathmapper = self.make_path_mapper(
+  File "/usr/lib/python3/dist-packages/cwltool/command_line_tool.py", line 478, in make_path_mapper
+    return PathMapper(reffiles, runtimeContext.basedir, stagedir, separateDirs)
+  File "/usr/lib/python3/dist-packages/cwltool/pathmapper.py", line 70, in __init__
+    self.setup(dedup(referenced_files), basedir)
+  File "/usr/lib/python3/dist-packages/cwltool/pathmapper.py", line 173, in setup
+    self.visit(
+  File "/usr/lib/python3/dist-packages/cwltool/pathmapper.py", line 133, in visit
+    with SourceLine(
+  File "/usr/lib/python3/dist-packages/schema_salad/sourceline.py", line 256, in __exit__
+    raise self.makeError(str(exc_value)) from exc_value
+schema_salad.exceptions.ValidationException: [Errno 2] No such file or directory: '/home/jzvolensky/Documents/sentinel1-app-package/src-exp/HI'
+(ap-hello-world) jzvolensky@sci-jzvolensky:~/Documents/sentinel1-app-package/src-exp$ cwl-runner --debug ap_hw_exp.cwl#runHWapp --Input_String "params.yaml"
+INFO /usr/bin/cwl-runner 3.1.20220224085855
+INFO Resolved 'ap_hw_exp.cwl#runHWapp' to 'file:///home/jzvolensky/Documents/sentinel1-app-package/src-exp/ap_hw_exp.cwl#runHWapp'
+DEBUG Parsed job order from command line: {
+    "id": "ap_hw_exp.cwl#runHWapp",
+    "Input_String": {
+        "class": "File",
+        "location": "file:///home/jzvolensky/Documents/sentinel1-app-package/src-exp/params.yaml"
+    }
+}
+DEBUG [job runHWapp] initializing from file:///home/jzvolensky/Documents/sentinel1-app-package/src-exp/ap_hw_exp.cwl#runHWapp
+DEBUG [job runHWapp] {
+    "Input_String": {
+        "class": "File",
+        "location": "file:///home/jzvolensky/Documents/sentinel1-app-package/src-exp/params.yaml",
+        "size": 38,
+        "basename": "params.yaml",
+        "nameroot": "params",
+        "nameext": ".yaml"
+    }
+}
+DEBUG [job runHWapp] path mappings is {
+    "file:///home/jzvolensky/Documents/sentinel1-app-package/src-exp/params.yaml": [
+        "/home/jzvolensky/Documents/sentinel1-app-package/src-exp/params.yaml",
+        "/var/lib/cwl/stg660ad569-632b-4508-b2ab-9eddc0eba0f8/params.yaml",
+        "File",
+        true
+    ]
+}
+DEBUG [job runHWapp] command line bindings is [
+    {
+        "position": [
+            -1000000,
+            0
+        ],
+        "datum": "conda"
+    },
+    {
+        "position": [
+            -1000000,
+            1
+        ],
+        "datum": "run"
+    },
+    {
+        "position": [
+            -1000000,
+            2
+        ],
+        "datum": "-n"
+    },
+    {
+        "position": [
+            -1000000,
+            3
+        ],
+        "datum": "ap-hello-world"
+    },
+    {
+        "position": [
+            -1000000,
+            4
+        ],
+        "datum": "python"
+    },
+    {
+        "position": [
+            -1000000,
+            5
+        ],
+        "datum": "hello_world.py"
+    },
+    {
+        "position": [
+            0,
+            "Input_String"
+        ],
+        "datum": {
+            "class": "File",
+            "location": "file:///home/jzvolensky/Documents/sentinel1-app-package/src-exp/params.yaml",
+            "size": 38,
+            "basename": "params.yaml",
+            "nameroot": "params",
+            "nameext": ".yaml",
+            "path": "/var/lib/cwl/stg660ad569-632b-4508-b2ab-9eddc0eba0f8/params.yaml",
+            "dirname": "/var/lib/cwl/stg660ad569-632b-4508-b2ab-9eddc0eba0f8"
+        }
+    }
+]
+DEBUG [job runHWapp] initial work dir {}
+INFO [job runHWapp] /tmp/9r0lq5ej$ docker \
+    run \
+    -i \
+    --mount=type=bind,source=/tmp/9r0lq5ej,target=/cIeLsH \
+    --mount=type=bind,source=/tmp/ub8j_dye,target=/tmp \
+    --mount=type=bind,source=/home/jzvolensky/Documents/sentinel1-app-package/src-exp/params.yaml,target=/var/lib/cwl/stg660ad569-632b-4508-b2ab-9eddc0eba0f8/params.yaml,readonly \
+    --workdir=/cIeLsH \
+    --read-only=true \
+    --user=1002:1003 \
+    --rm \
+    --cidfile=/tmp/6ynwd1f3/20230918150429-760092.cid \
+    --env=TMPDIR=/tmp \
+    --env=HOME=/cIeLsH \
+    potato55/hello_world_app:2.5 \
+    conda \
+    run \
+    -n \
+    ap-hello-world \
+    python \
+    hello_world.py \
+    /var/lib/cwl/stg660ad569-632b-4508-b2ab-9eddc0eba0f8/params.yaml
+python: can't open file '/cIeLsH/hello_world.py': [Errno 2] No such file or directory
+
+ERROR conda.cli.main_run:execute(47): `conda run python hello_world.py /var/lib/cwl/stg660ad569-632b-4508-b2ab-9eddc0eba0f8/params.yaml` failed. (See above for error)
+INFO [job runHWapp] Max memory used: 45MiB
+WARNING [job runHWapp] exited with status: 2
+ERROR [job runHWapp] Job error:
+("Error collecting output for parameter 'cmd_output': ap_hw_exp.cwl:49:20: Did not find output file with glob pattern: '[]'.", {})
+WARNING [job runHWapp] completed permanentFail
+DEBUG [job runHWapp] outputs {}
+DEBUG [job runHWapp] Removing input staging directory /tmp/i8glt5m4
+DEBUG [job runHWapp] Removing temporary directory /tmp/ub8j_dye
+DEBUG Removing intermediate output directory /tmp/9r0lq5ej
+{}
+WARNING Final process status is permanentFail
+(ap-hello-world) jzvolensky@sci-jzvolensky:~/Documents/sentinel1-app-package/src-exp$ 

@@ -33,7 +33,7 @@ $graph:
     
     - class: CommandLineTool
       id: hwapp
-      baseCommand: [conda,run,-n,ap-hello-world,python,hello_world.py]
+      baseCommand: [conda,run,-n,ap-hello-world,python, hello_world.py]
       inputs:
         input_string:
           type: string
@@ -46,5 +46,5 @@ $graph:
             glob: .
       requirements:
         DockerRequirement:
-          dockerPull: potato55/ap-hello-world:2.5
+          dockerPull: potato55/ap-hello-world:3.0
 

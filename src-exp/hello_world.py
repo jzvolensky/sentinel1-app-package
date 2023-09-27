@@ -5,8 +5,8 @@ import yaml
 from datetime import datetime
 
 @click.command()
-@click.option("-f", "--file", type=click.Path(exists=True), default="params.yaml", help="Path to parameter file")
-@click.option("-o", "--output", type=click.Path(), default="catalog.json", help="Path to output STAC catalog JSON file")
+@click.option("-f", "--file", type=click.Path(exists=True), default="/app/params.yaml", help="Path to parameter file")
+@click.option("-o", "--output", type=click.Path(), default="/app/catalog.json", help="Path to output STAC catalog JSON file")
 
 def main(file, output):
     with open(file, "r") as params_file:
