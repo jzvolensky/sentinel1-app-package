@@ -33,7 +33,7 @@ $graph:
     
     - class: CommandLineTool
       id: hwapp
-      baseCommand: [conda,run,-n,ap-hello-world,python, hello_world.py]
+      baseCommand: [conda,run,-n,ap-hello-world,python, "/app/hello_world.py"]
       inputs:
         input_string:
           type: string
