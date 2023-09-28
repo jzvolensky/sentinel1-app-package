@@ -3,6 +3,7 @@ import pystac
 import json
 import yaml
 from datetime import datetime
+import os 
 
 @click.command()
 @click.option("-f", "--file", type=click.Path(exists=True), default="/app/params.yaml", help="Path to parameter file")
@@ -33,7 +34,8 @@ def main(file, output):
     
     click.echo(f"Item Title: {item.common_metadata.title}")
 
-    with open(output, "w") as catalog_file:
+    absolute_output_path = os.path.abspath(output)
+    with open(absolute_output_path, "w") as catalog_file:
         json.dump(catalog_dict, catalog_file, indent=4)
 
 if __name__ == "__main__":
