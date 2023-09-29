@@ -1,6 +1,6 @@
 
-#@domain = 192-168-49-2.nip.io
-@domain = 192.168.49.2.nip.io
+@domain = 192-168-49-2.nip.io
+#@domain = 192.168.49.2.nip.io
 @ades = ades-open.{{domain}}
 @login = auth.{{domain}}
 @user = eric
@@ -74,7 +74,7 @@ Accept: application/json
 ###
 # @name executeProcess
 POST https://{{ades}}/{{user}}/wps3/processes/hello-world-STAC-1_0/execution HTTP/1.1
-Authorization: Bearer {{idToken}}
+#Authorization: Bearer {{idToken}}
 Accept: application/json
 Content-Type: application/json
 Prefer: respond-async
@@ -111,3 +111,12 @@ Accept: application/json
 # Errors I get
 # wf-execution-1-0c2fee218-5620-11ee-9b55-0242ac11000d   wf-c2fee218-5620-11ee-9b55-0242ac11000d--1-6slx8   2/3     Error              0                  15s
 # wf-execution-1-0c2fee218-5620-11ee-9b55-0242ac11000d   wf-c2fee218-5620-11ee-9b55-0242ac11000d--1-zr2xt   0/3     Error    
+
+
+
+hello-world-stac-1-02ac768a8-5ea4-11ee-8f70-0242ac11000f 6s Warning FailedMount pod/wf-2ac768a8-5ea4-11ee-8f70-0242ac11000f--1-2qvdp MountVolume.SetUp failed for volume "cwl-config-volume" : object "hello-world-stac-1-02ac768a8-5ea4-11ee-8f70-0242ac11000f"/"cwl-config" not registered
+hello-world-stac-1-02ac768a8-5ea4-11ee-8f70-0242ac11000f 6s Warning FailedMount pod/wf-2ac768a8-5ea4-11ee-8f70-0242ac11000f--1-2qvdp MountVolume.SetUp failed for volume "pod-env-vars" : object "hello-world-stac-1-02ac768a8-5ea4-11ee-8f70-0242ac11000f"/"pod-env-vars" not registered
+hello-world-stac-1-02ac768a8-5ea4-11ee-8f70-0242ac11000f 6s Warning FailedMount pod/wf-2ac768a8-5ea4-11ee-8f70-0242ac11000f--1-2qvdp MountVolume.SetUp failed for volume "pod-nodeselectors" : object "hello-world-stac-1-02ac768a8-5ea4-11ee-8f70-0242ac11000f"/"pod-nodeselectors" not registered
+hello-world-stac-1-02ac768a8-5ea4-11ee-8f70-0242ac11000f 6s Warning FailedMount pod/wf-2ac768a8-5ea4-11ee-8f70-0242ac11000f--1-2qvdp MountVolume.SetUp failed for volume "inputs-config-volume" : object "hello-world-stac-1-02ac768a8-5ea4-11ee-8f70-0242ac11000f"/"inputs-config" not registered
+hello-world-stac-1-02ac768a8-5ea4-11ee-8f70-0242ac11000f 6s Warning FailedMount pod/wf-2ac768a8-5ea4-11ee-8f70-0242ac11000f--1-2qvdp MountVolume.SetUp failed for volume "kube-api-access-hdnhw" : object "hello-world-stac-1-02ac768a8-5ea4-11ee-8f70-0242ac11000f"/"kube-root-ca.crt" not registered
+
