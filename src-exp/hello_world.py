@@ -13,6 +13,9 @@ def main(file, output):
     with open(file, "r") as params_file:
         params = yaml.safe_load(params_file)
 
+    click.echo('Starting Hello World Catalogue')
+    click.echo(f"Input String: {params.get('input_string')}")
+
     input_string = params.get("input_string")
 
     catalog = pystac.Catalog(id="hello-catalog", description="Hello World Catalogue")
@@ -37,6 +40,9 @@ def main(file, output):
     absolute_output_path = os.path.abspath(output)
     with open(absolute_output_path, "w") as catalog_file:
         json.dump(catalog_dict, catalog_file, indent=4)
+
+    click.echo(f"Catalogue written to {absolute_output_path}")
+    click.echo('Finished Hello World Catalogue')
 
 if __name__ == "__main__":
     main()

@@ -46,5 +46,5 @@ $graph:
             glob: .
       requirements:
         DockerRequirement:
-          dockerPull: potato55/ap-hello-world:3.5
+          dockerPull: potato55/hello-world-app:4.0
 
