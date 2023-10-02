@@ -1,7 +1,7 @@
 cwlVersion: v1.0
 $namespaces:
   s: https://schema.org/
-s:softwareVersion: '1.0'
+s:softwareVersion: '1.1'
 s:dateCreated: '2023-09-18'
 s:codeRepository: https://github.com/jzvolensky/sentinel1-app-package/tree/experimental
 s:author:
