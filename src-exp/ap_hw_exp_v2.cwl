@@ -7,7 +7,7 @@ s:codeRepository: https://github.com/jzvolensky/sentinel1-app-package/tree/exper
 s:author:
   - s:name: Juraj Zvolensky
     s:email: email@email.com
-    s:affiliation: This gave me depression  
+    s:affiliation: None 
 
 $graph:
     # Workflow definition
