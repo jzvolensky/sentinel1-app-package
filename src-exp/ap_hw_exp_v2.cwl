@@ -12,7 +12,7 @@ s:author:
 $graph:
     # Workflow definition
     - class: Workflow
-      doc: This workflow is used to generate Hello World STAC
+      doc: This workflow is used to generate Hello World STAC cat
       id: hello-world-STAC
       inputs:
         input_string:
