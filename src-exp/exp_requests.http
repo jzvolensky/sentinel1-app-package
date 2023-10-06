@@ -81,7 +81,7 @@ Prefer: respond-async
 
 {
   "inputs": {
-    "input_string": "Hello World"
+    "input_string": "--params"
   },
   "response": "raw"
 }
