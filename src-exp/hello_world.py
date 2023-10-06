@@ -8,15 +8,11 @@ import argparse
 
 
 args = argparse.ArgumentParser()
-args.add_argument("--params", help="Path to params file", default="params.yaml")
+args.add_argument("--param", help="Path to params file", default="Hello World")
 
 
 def main():
 
-    with open(args.params, "r") as params_file:
-        params = yaml.safe_load(params_file)
-
-    input_string = params.get("input_string")
 
     catalog = pystac.Catalog(id="hello-catalog", description="Hello World Catalogue")
 
@@ -25,7 +21,7 @@ def main():
                     datetime=datetime(1970,1,1,0,0,0), 
                     bbox=None, 
                     properties={
-                        "title": input_string  
+                        "title": param  
                     }
                 )
     item.add_asset("data", pystac.Asset(href="http://example.com/data"))
@@ -50,5 +46,5 @@ def main():
 
 if __name__ == "__main__":
     args = args.parse_args()
-    params_file = args.params
+    param = args.param
     main()

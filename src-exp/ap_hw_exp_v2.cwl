@@ -1,7 +1,7 @@
 cwlVersion: v1.0
 $namespaces:
   s: https://schema.org/
-s:softwareVersion: 1.1
+s:softwareVersion: 1.2
 s:dateCreated: '2023-09-18'
 s:codeRepository: https://github.com/jzvolensky/sentinel1-app-package/tree/experimental
 s:author:
@@ -17,7 +17,7 @@ $graph:
       inputs:
         input_string:
             type: string
-            default: --params
+            default: --param
       outputs:
         - id: wf_outputs
           type: Directory
@@ -33,7 +33,7 @@ $graph:
     
     - class: CommandLineTool
       id: hwapp
-      baseCommand: [conda,run,-n,ap-hello-world,python, "/app/hello_world.py"]
+      baseCommand: [python, /app/hello-world.py]
       inputs:
         input_string:
           type: string
@@ -46,5 +46,5 @@ $graph:
             glob: .
       requirements:
         DockerRequirement:
-          dockerPull: potato55/hello-world-app:5.0
+          dockerPull: potato55/hello-world-app:6.0
 
