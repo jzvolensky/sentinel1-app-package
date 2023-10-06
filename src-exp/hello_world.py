@@ -1,20 +1,20 @@
-import click
+
 import pystac
 import json
 import yaml
 from datetime import datetime
 import os 
+import argparse
 
-@click.command()
-@click.option("-f", "--file", type=click.Path(exists=True), default="/app/params.yaml", help="Path to parameter file")
-@click.option("-o", "--output", type=click.Path(), default="/app/catalog.json", help="Path to output STAC catalog JSON file")
 
-def main(file, output):
-    with open(file, "r") as params_file:
+args = argparse.ArgumentParser()
+args.add_argument("--params", help="Path to params file", default="params.yaml")
+
+
+def main():
+
+    with open(args.params, "r") as params_file:
         params = yaml.safe_load(params_file)
-
-    click.echo('Starting Hello World Catalogue')
-    click.echo(f"Input String: {params.get('input_string')}")
 
     input_string = params.get("input_string")
 
@@ -33,16 +33,22 @@ def main(file, output):
     catalog.add_item(item)
 
     catalog_dict = catalog.to_dict()
-    click.echo(json.dumps(catalog_dict, indent=4))
+    print(json.dumps(catalog_dict, indent=4))
     
-    click.echo(f"Item Title: {item.common_metadata.title}")
+    print(f"Item Title: {item.common_metadata.title}")
+
+    output = "../tmp/outdir/catalog.json"
 
     absolute_output_path = os.path.abspath(output)
+    os.makedirs(os.path.dirname(absolute_output_path), exist_ok=True)
+
     with open(absolute_output_path, "w") as catalog_file:
         json.dump(catalog_dict, catalog_file, indent=4)
 
-    click.echo(f"Catalogue written to {absolute_output_path}")
-    click.echo('Finished Hello World Catalogue')
+    print(f"Catalogue written to {absolute_output_path}")
+    print('Finished Hello World Catalogue')
 
 if __name__ == "__main__":
+    args = args.parse_args()
+    params_file = args.params
     main()

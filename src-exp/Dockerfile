@@ -7,6 +7,6 @@ COPY environment.yml /app
 
 RUN conda env create -f environment.yml
 
-ENV PATH="/opt/conda/envs/ap-hello-world/bin:${PATH}"
+ENV PATH="/opt/conda/envs/ap-hello-world/bin:${PATH}/app"
 
 #CMD ["conda", "run", "-n", "ap-hello-world", "python", "hello_world.py"]

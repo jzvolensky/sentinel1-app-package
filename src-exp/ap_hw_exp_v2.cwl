@@ -17,7 +17,7 @@ $graph:
       inputs:
         input_string:
             type: string
-            default: Hello World
+            default: --params
       outputs:
         - id: wf_outputs
           type: Directory
@@ -46,5 +46,5 @@ $graph:
             glob: .
       requirements:
         DockerRequirement:
-          dockerPull: potato55/hello-world-app:4.0
+          dockerPull: potato55/hello-world-app:5.0
 

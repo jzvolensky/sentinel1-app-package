@@ -1,0 +1,13 @@
+{
+    "type": "Catalog",
+    "id": "hello-catalog",
+    "stac_version": "1.0.0",
+    "description": "Hello World Catalogue",
+    "links": [
+        {
+            "rel": "item",
+            "href": null,
+            "type": "application/json"
+        }
+    ]
+}
