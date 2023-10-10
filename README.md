@@ -4,24 +4,30 @@ The aim of this project is to create an example application package for acquirin
 # Development setup
 This Application Package is meant to be used on the [EOEPCA](https://github.com/EOEPCA) platform. However, local testing and development can be performed locally. 
 
+1. create a virtual environment
 
-1. From root set up the conda environment
-```sh
-conda env create -f src/environment.yml
+```bash
+python3 -m venv venv
 ```
-2. Activate conda environment
-```sh
-conda activate sen1grdenv
-```
-**You will need to add your Sentinel Hub credentials in src/sh_credentials.py**
 
-3. Set up your preferred Area of Interest (AoI) in the params.yml file and then run the script from the src folder
-```sh
-python3 app.py
+2. activate the virtual environment
+
+```bash
+source venv/bin/activate
 ```
+
+3. install the requirements
+
+```bash
+pip install -r requirements.txt
+```
+
 
 # Running on EOEPCA
 If you have a working local EOEPCA deployment, for example based on the [deployment guide](https://deployment-guide.docs.eoepca.org/current/), you can also execute the Application Package cwl directly through http requests which can be found in **src/requests.http**. These can be executed using the VS code plugin [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client). 
 
 **Note: All of the requests are preconfigured with the simple deployment from the deployment guide. If you have a different configuration you might need to tweak the requests too**
 
+# Docker image
+
+Current release: potato55/hello-world-app:7.0
