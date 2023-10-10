@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY hello_world.py /app
 
-RUN pip install pystac pyyaml
+RUN pip install pystac pyyaml 
+
+ENV PATH="/app:${PATH}"
 
 

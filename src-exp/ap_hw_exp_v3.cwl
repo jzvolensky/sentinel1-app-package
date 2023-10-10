@@ -19,7 +19,7 @@ $graph:
     outputs:
       - id: wf_outputs
         type: Directory
-        outputSource: wf_step_1/wf_outputs
+        outputSource: hello_world/results
     steps:
       - id: hello_world
         run: '#hwapp'
@@ -28,7 +28,7 @@ $graph:
             source:
               - input_string
         out:
-          - results
+          - id: results
   - class: CommandLineTool
     id: hwapp
     baseCommand:
@@ -48,4 +48,4 @@ $graph:
           glob: .
     requirements:
       DockerRequirement:
-        dockerPull: potato55/hello-world-app:6.0
+        dockerPull: potato55/hello-world-app:7.0

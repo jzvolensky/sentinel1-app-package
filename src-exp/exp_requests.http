@@ -45,7 +45,7 @@ Content-Type: application/json
 
 {
   "executionUnit": {
-    "href": "https://raw.githubusercontent.com/jzvolensky/sentinel1-app-package/experimental/src-exp/ap_hw_exp_v2.cwl",
+    "href": "https://raw.githubusercontent.com/jzvolensky/sentinel1-app-package/experimental/src-exp/ap_hw_exp_v3.cwl",
     "type": "application/cwl"
   }
 }
@@ -60,20 +60,20 @@ Accept: application/json
 ###
 
 # @name getProcessDetails
-GET https://{{ades}}/{{user}}/wps3/processes/hello-world-STAC-1_2 HTTP/1.1
+GET https://{{ades}}/{{user}}/wps3/processes/hello-world-STAC-1_3 HTTP/1.1
 Authorization: Bearer {{idToken}}
 Accept: application/json
 
 ###
 
 # @name undeployProcess
-DELETE https://{{ades}}/{{user}}/wps3/processes/hello-world-STAC-1_2 HTTP/1.1
+DELETE https://{{ades}}/{{user}}/wps3/processes/hello-world-STAC-1_3 HTTP/1.1
 Authorization: Bearer {{idToken}}
 Accept: application/json
 
 ###
 # @name executeProcess
-POST https://{{ades}}/{{user}}/wps3/processes/hello-world-STAC-1_2/execution HTTP/1.1
+POST https://{{ades}}/{{user}}/wps3/processes/hello-world-STAC-1_3/execution HTTP/1.1
 #Authorization: Bearer {{idToken}}
 Accept: application/json
 Content-Type: application/json
@@ -81,7 +81,7 @@ Prefer: respond-async
 
 {
   "inputs": {
-    "input_string": "--params"
+    "input_string": "Hi"
   },
   "response": "raw"
 }

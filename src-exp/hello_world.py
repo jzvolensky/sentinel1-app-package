@@ -12,13 +12,17 @@ args.add_argument("--param", help="Path to params file", default="Hello World")
 
 
 def main():
-
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--param", help="Path to params file", default="Hello World")
+    args = parser.parse_args()
+    
+    param = args.param
 
     catalog = pystac.Catalog(id="hello-catalog", description="Hello World Catalogue")
 
     item = pystac.Item(id="my-item", 
                     geometry=None, 
-                    datetime=datetime(1970,1,1,0,0,0), 
+                    datetime=datetime(1970, 1, 1, 0, 0, 0), 
                     bbox=None, 
                     properties={
                         "title": param  
@@ -33,18 +37,15 @@ def main():
     
     print(f"Item Title: {item.common_metadata.title}")
 
-    output = "../tmp/outdir/catalog.json"
+    cwd = os.getcwd()
+    output_file = os.path.join(cwd, "catalog.json")
 
-    absolute_output_path = os.path.abspath(output)
-    os.makedirs(os.path.dirname(absolute_output_path), exist_ok=True)
-
-    with open(absolute_output_path, "w") as catalog_file:
+    # Write the catalog to the output file
+    with open(output_file, "w") as catalog_file:
         json.dump(catalog_dict, catalog_file, indent=4)
 
-    print(f"Catalogue written to {absolute_output_path}")
+    print(f"Catalogue written to {output_file}")
     print('Finished Hello World Catalogue')
 
 if __name__ == "__main__":
-    args = args.parse_args()
-    param = args.param
     main()
